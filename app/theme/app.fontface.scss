@@ -1,0 +1,43 @@
+// app fontface
+
+/* Blogger Sans Regular */
+@font-face {
+    font-family: 'Blogger Sans Regular';
+    src: url('../fonts/blogger_sans/regular/blogger_sans-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans/regular/blogger_sans-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Blogger Sans Medium */
+@font-face {
+    font-family: 'Blogger Sans Medium';
+    src: url('../fonts/blogger_sans/medium/blogger_sans-medium-webfont.woff2') format('woff2'),
+         url('../fonts/blogger_sans/medium/blogger_sans-medium-webfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Capsuula Regular */
+@font-face {
+    font-family: 'Capsuula Regular';
+    src: url('../fonts/capsuula/regular/capsuula-webfont.woff2') format('woff2'),
+         url('../fonts/capsuula/regular/capsuula-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Caviar Dreams Regular */
+@font-face {
+    font-family: 'Caviar Dreams Regular';
+    src: url('../fonts/caviar_dreams/regular/caviardreams-webfont.woff2') format('woff2'),
+         url('../fonts/caviar_dreams/regular/caviardreams-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Caviar Dreams Bold */
+@font-face {
+    font-family: 'Caviar Dreams Bold';
+    src: url('../fonts/caviar_dreams/bold/caviar_dreams_bold-webfont.woff2') format('woff2'),
+         url('../fonts/caviar_dreams/bold/caviar_dreams_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

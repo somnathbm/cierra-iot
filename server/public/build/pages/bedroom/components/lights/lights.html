@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      LIGHTS
+    </ion-title>
+    <ion-buttons right>
+      <button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page bedroom__lights">
+  <ion-card>
+    <img src="build/images/wall_lights.jpg" />
+    <div class="card-title">Wall lights</div>
+    <div class="switches">
+      <ion-item>
+        <ion-toggle ([ngModel])="isChecked" [checked]="isChecked" (ionChange)="switchChange()"></ion-toggle>
+      </ion-item>
+    </div>
+  </ion-card>
+  <ion-card>
+    <img src="build/images/pendant_lights2.jpg" />
+    <div class="card-title">Pendant lights</div>
+    <div class="switches">
+      <ion-item>
+        <ion-toggle checked="false"></ion-toggle>
+      </ion-item>
+    </div>
+  </ion-card>
+</ion-content>

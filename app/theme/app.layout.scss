@@ -1,0 +1,51 @@
+// common layout pattern and theming
+@import "app.fontface";
+
+// variables
+$ca_light_bg: antiquewhite;
+$ca_light_txt_clr: darkslategray;
+
+// room components
+.__component_tile{
+		display: flex;
+		flex-flow: column wrap;
+		align-items: center;
+		.__components{
+			width: 50%;
+			align-self: center;
+			img{max-width: 100%;}
+			h4{text-align: center;}
+		}
+}  
+
+// side menu
+.menu_light_accent{
+	background: color($colors, primary, base);
+	h3, h6{ text-align: center; }
+	h3{ margin-top: 143px; font-family: 'Caviar Dreams Bold'; }
+	h6{ margin-top: 16px; color: lighten(#000, 15%); font-family: 'Blogger Sans Regular'; }
+}
+
+.card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .switches {
+  	position: absolute;
+  	top: 5%;
+  	right: 5%;
+  	ion-item{ background: transparent !important; }
+  }
+}
