@@ -26,7 +26,7 @@ app.use(body.urlencoded({ extended: true }));
 var appEnv = cfenv.getAppEnv();
 
 var iotConfig;
-var baseConfig = appEnv.getServices('iotf-service');
+var baseConfig = appEnv.getServices('cel_cierra_iot');
 
 if(!baseConfig || Object.keys(baseConfig).length == 0) {
     var configJSON = require('./cierra_vcap.json');
@@ -37,7 +37,7 @@ if(!baseConfig || Object.keys(baseConfig).length == 0) {
     })
 }
 else{
-    iotConfig = baseConfig['iotf-service'];
+    iotConfig = baseConfig['cel_cierra_iot'];
 }
 
 // IBM Watson IoT appclient config
