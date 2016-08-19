@@ -20,25 +20,25 @@ var config = {
     applicationId : "295033ac-e5ad-4769-bc20-9fc1711b813f"
 };
 
-//app.use(body.json());
-//app.use(body.urlencoded({ extended: true }));
+app.use(body.json());
+app.use(body.urlencoded({ extended: true }));
 
-//var appEnv = cfenv.getAppEnv();
+var appEnv = cfenv.getAppEnv();
 
-//var iotConfig;
-//var baseConfig = appEnv.getServices('cel_cierra_iot');
+var iotConfig;
+var baseConfig = appEnv.getServices('iotf-service');
 
-// if(!baseConfig || Object.keys(baseConfig).length == 0) {
-//     var configJSON = require('./vcap_service.json');
-//     configJSON["cel_cierra_iot"].forEach(function(entry) {
-//         if( entry.name == 'cel_cierra_iot' ){
-//             iotConfig = entry;
-//         }
-//     })
-// }
-// else{
-//     iotConfig = baseConfig['cel_cierra_iot'];
-// }
+if(!baseConfig || Object.keys(baseConfig).length == 0) {
+    var configJSON = require('./cierra_vcap.json');
+    configJSON["iotf-service"].forEach(function(entry) {
+        if( entry.name == 'cel_cierra_iot' ){
+            iotConfig = entry;
+        }
+    })
+}
+else{
+    iotConfig = baseConfig['iotf-service'];
+}
 
 // IBM Watson IoT appclient config
 var appClientConfig = {
@@ -46,8 +46,9 @@ var appClientConfig = {
     "id": "homePi",
     "domain": "internetofthings.ibmcloud.com",
     "type": "pi_cierra",
-    "auth-method": "token"
-    "auth-token": "2kGUBlhBx_g8Z6R-_@"
+    "auth-method": "apikey",
+    "auth-key": iotConfig.credentials.apiKey,
+    "auth-token": iotConfig.credentials.apiToken
 };
 
 // init core sdk
@@ -73,19 +74,19 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-//appClient.connect();
-//console.log('IOTF is set!');
+appClient.connect();
+console.log('IOTF is set!');
 
-//appClient.log.setLevel = 'info';
+appClient.log.setLevel = 'info';
 
-// // device connect event
-// appClient.on('connect', function(){
-//     console.log('Device connected!');
-// });
+// device connect event
+appClient.on('connect', function(){
+    console.log('Device connected!');
+});
 
-// appClient.on('error', function(){
-//     console.log('Error occurred');
-// });
+appClient.on('error', function(){
+    console.log('Error occurred');
+});
 
 // init basics for an express app
 app.use(require('./lib/setup'));
