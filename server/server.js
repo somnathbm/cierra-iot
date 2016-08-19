@@ -35,7 +35,7 @@ ibmbluemix.initialize(config);
 var logger = ibmbluemix.getLogger();
 
 // initialize Watson iot connector
-//var appClient = new Client.IotfApplication(appClientConfig);
+var appClient = new Client.IotfApplication(appClientConfig);
 
 // all environments 
 app.set('host', process.env.VCAP_APP_HOST || 'localhost'); 
