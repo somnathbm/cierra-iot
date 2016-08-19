@@ -53,7 +53,7 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-//appClient.connect();
+appClient.connect();
 //console.log('IOTF is set!');
 
 //appClient.log.setLevel = 'info';
