@@ -20,14 +20,35 @@ var config = {
     applicationId : "295033ac-e5ad-4769-bc20-9fc1711b813f"
 };
 
+app.use(body.json());
+app.use(body.urlencoded({ extended: true }));
+
+var appEnv = cfenv.getAppEnv();
+
+var iotConfig;
+var baseConfig = appEnv.getServices('cel_cierra_iot');
+
+if(!baseConfig || Object.keys(baseConfig).length == 0) {
+    var configJSON = require('./vcap_service.json');
+    configJSON["cel_cierra_iot"].forEach(function(entry) {
+        if( entry.name == 'cel_cierra_iot' ){
+            iotConfig = entry;
+        }
+    })
+}
+else{
+    iotConfig = baseConfig['cel_cierra_iot'];
+}
+
 // IBM Watson IoT appclient config
 var appClientConfig = {
     "org": "1555wo",
     "id": "homePi",
     "domain": "internetofthings.ibmcloud.com",
     "type": "pi_cierra",
-    "auth-key": "token",
-    "auth-token": "2kGUBlhBx_g8Z6R-_@"
+    "auth-method": "apikey"
+    "auth-key": iotConfig.credentials.apiKey,
+    "auth-token": iotConfig.credentials.apiToken
 };
 
 // init core sdk
@@ -53,7 +74,7 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-appClient.connect();
+//appClient.connect();
 //console.log('IOTF is set!');
 
 //appClient.log.setLevel = 'info';
