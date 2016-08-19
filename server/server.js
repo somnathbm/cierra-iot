@@ -58,14 +58,14 @@ console.log('IOTF is set!');
 
 appClient.log.setLevel = 'info';
 
-// device connect event
-appClient.on('connect', function(){
-    console.log('Device connected!');
-});
+// // device connect event
+// appClient.on('connect', function(){
+//     console.log('Device connected!');
+// });
 
-appClient.on('error', function(){
-    console.log('Error occurred');
-});
+// appClient.on('error', function(){
+//     console.log('Error occurred');
+// });
 
 // init basics for an express app
 app.use(require('./lib/setup'));
