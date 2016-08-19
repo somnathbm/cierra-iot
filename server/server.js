@@ -20,13 +20,13 @@ var config = {
     applicationId : "295033ac-e5ad-4769-bc20-9fc1711b813f"
 };
 
-app.use(body.json());
-app.use(body.urlencoded({ extended: true }));
+//app.use(body.json());
+//app.use(body.urlencoded({ extended: true }));
 
-var appEnv = cfenv.getAppEnv();
+//var appEnv = cfenv.getAppEnv();
 
 //var iotConfig;
-var baseConfig = appEnv.getServices('cel_cierra_iot');
+//var baseConfig = appEnv.getServices('cel_cierra_iot');
 
 // if(!baseConfig || Object.keys(baseConfig).length == 0) {
 //     var configJSON = require('./vcap_service.json');
@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-appClient.connect();
+//appClient.connect();
 //console.log('IOTF is set!');
 
 //appClient.log.setLevel = 'info';
