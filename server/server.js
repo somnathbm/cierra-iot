@@ -46,9 +46,8 @@ var appClientConfig = {
     "id": "homePi",
     "domain": "internetofthings.ibmcloud.com",
     "type": "pi_cierra",
-    "auth-method": "apikey"
-    "auth-key": "a-1555wo-xlxqy5uha1",
-    "auth-token": "eKWw8jhlDJDsB6lttL"
+    "auth-method": "token"
+    "auth-token": "2kGUBlhBx_g8Z6R-_@"
 };
 
 // init core sdk
