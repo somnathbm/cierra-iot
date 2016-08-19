@@ -47,8 +47,8 @@ var appClientConfig = {
     "domain": "internetofthings.ibmcloud.com",
     "type": "pi_cierra",
     "auth-method": "apikey"
-    "auth-key": iotConfig.credentials.apiKey,
-    "auth-token": iotConfig.credentials.apiToken
+    "auth-key": "a-1555wo-xlxqy5uha1",
+    "auth-token": "eKWw8jhlDJDsB6lttL"
 };
 
 // init core sdk
@@ -74,7 +74,7 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-//appClient.connect();
+appClient.connect();
 //console.log('IOTF is set!');
 
 //appClient.log.setLevel = 'info';
