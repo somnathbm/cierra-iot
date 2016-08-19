@@ -1,0 +1,15 @@
+applications:
+- name: cierra
+  instances: 1
+  memory: 512M
+  disk_quota: 1024M
+  routes:
+  - route: cierra.mybluemix.net
+  command: server/server.js
+  services:
+  - cierra-AdvancedMobileAccess
+  - cierra-imfpush
+  - cierra-cloudantNoSQLDB
+  - cel_cierra_iot
+  - performance-monitoring-auto
+  stack: cflinuxfs2

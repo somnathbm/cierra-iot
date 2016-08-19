@@ -2,6 +2,9 @@
   "name": "cierra",
   "version": "1.0.0",
   "description": "Cierra: an Raspberry Pi-Ionic project for Home Automation powered by IBM Bluemix™ and IBM Watson IoT™",
+  "scripts": {
+  	"start": "node server/server.js"
+  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
