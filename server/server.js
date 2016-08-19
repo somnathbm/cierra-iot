@@ -25,20 +25,20 @@ app.use(body.urlencoded({ extended: true }));
 
 var appEnv = cfenv.getAppEnv();
 
-var iotConfig;
+//var iotConfig;
 var baseConfig = appEnv.getServices('cel_cierra_iot');
 
-if(!baseConfig || Object.keys(baseConfig).length == 0) {
-    var configJSON = require('./vcap_service.json');
-    configJSON["cel_cierra_iot"].forEach(function(entry) {
-        if( entry.name == 'cel_cierra_iot' ){
-            iotConfig = entry;
-        }
-    })
-}
-else{
-    iotConfig = baseConfig['cel_cierra_iot'];
-}
+// if(!baseConfig || Object.keys(baseConfig).length == 0) {
+//     var configJSON = require('./vcap_service.json');
+//     configJSON["cel_cierra_iot"].forEach(function(entry) {
+//         if( entry.name == 'cel_cierra_iot' ){
+//             iotConfig = entry;
+//         }
+//     })
+// }
+// else{
+//     iotConfig = baseConfig['cel_cierra_iot'];
+// }
 
 // IBM Watson IoT appclient config
 var appClientConfig = {
