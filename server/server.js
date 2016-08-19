@@ -35,7 +35,7 @@ ibmbluemix.initialize(config);
 var logger = ibmbluemix.getLogger();
 
 // initialize Watson iot connector
-var appClient = new Client.IotfApplication(appClientConfig);
+//var appClient = new Client.IotfApplication(appClientConfig);
 
 // all environments 
 app.set('host', process.env.VCAP_APP_HOST || 'localhost'); 
@@ -53,10 +53,10 @@ app.use(function(req, res, next) {
 
 
 // connect to the IBM Watson IoT platform
-appClient.connect();
-console.log('IOTF is set!');
+//appClient.connect();
+//console.log('IOTF is set!');
 
-appClient.log.setLevel = 'info';
+//appClient.log.setLevel = 'info';
 
 // // device connect event
 // appClient.on('connect', function(){
