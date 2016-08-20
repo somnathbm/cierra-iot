@@ -1,0 +1,75 @@
+{
+    "AdvancedMobileAccess": [
+        {
+            "name": "cierra-AdvancedMobileAccess",
+            "label": "AdvancedMobileAccess",
+            "plan": "Gold",
+            "credentials": {
+                "serverUrl": "https://imf-authserver.ng.bluemix.net/imf-authserver",
+                "clientId": "295033ac-e5ad-4769-bc20-9fc1711b813f",
+                "secret": "M4WG/GsOTVGg9HWa7fwt4w",
+                "tenantId": "295033ac-e5ad-4769-bc20-9fc1711b813f",
+                "authorizationEndpoint": "https://mobileclientaccess.ng.bluemix.net/oauth/v2/authorization",
+                "tokenEndpoint": "https://mobileclientaccess.ng.bluemix.net/oauth/v2/token",
+                "admin_url": "https://mobile.ng.bluemix.net/imfmobileplatformdashboard/?appGuid=295033ac-e5ad-4769-bc20-9fc1711b813f"
+            }
+        }
+    ],
+    "imfpush": [
+        {
+            "name": "cierra-imfpush",
+            "label": "imfpush",
+            "plan": "Basic",
+            "credentials": {
+                "appGuid": "95184f80-8533-4c38-93db-76ee3465e995",
+                "url": "http://imfpush.ng.bluemix.net/imfpush/v1/apps/95184f80-8533-4c38-93db-76ee3465e995",
+                "admin_url": "//mobile.ng.bluemix.net/imfpushdashboard/?appGuid=95184f80-8533-4c38-93db-76ee3465e995",
+                "appSecret": "90cdecad-d89e-4e2e-be8a-35731d870a83",
+                "clientSecret": "046ce7a6-6b1a-4223-8ef4-77131238df0b"
+            }
+        }
+    ],
+    "cloudantNoSQLDB": [
+        {
+            "name": "cierra-cloudantNoSQLDB",
+            "label": "cloudantNoSQLDB",
+            "plan": "Shared",
+            "credentials": {
+                "username": "eed762d7-f535-420b-8bfc-df1bdc407540-bluemix",
+                "password": "a51f426fde6559a4b548eef4358228de74d6a4e307a27dff9c09a12915017d47",
+                "host": "eed762d7-f535-420b-8bfc-df1bdc407540-bluemix.cloudant.com",
+                "port": 443,
+                "url": "https://eed762d7-f535-420b-8bfc-df1bdc407540-bluemix:a51f426fde6559a4b548eef4358228de74d6a4e307a27dff9c09a12915017d47@eed762d7-f535-420b-8bfc-df1bdc407540-bluemix.cloudant.com"
+            }
+        }
+    ],
+    "iotf-service": [
+        {
+            "name": "cel_cierra_iot",
+            "label": "iotf-service",
+            "plan": "iotf-service-free",
+            "credentials": {
+                "iotCredentialsIdentifier": "a2g6k39sl6r5",
+                "mqtt_host": "1555wo.messaging.internetofthings.ibmcloud.com",
+                "mqtt_u_port": 1883,
+                "mqtt_s_port": 8883,
+                "http_host": "1555wo.internetofthings.ibmcloud.com",
+                "org": "1555wo",
+                "apiKey": "a-1555wo-aeg9ok3grj",
+                "apiToken": "E-?htJ)nSzWg5cd?WX"
+            }
+        }
+    ],
+    "AvailabilityMonitoring": [
+        {
+            "name": "performance-monitoring-auto",
+            "label": "AvailabilityMonitoring",
+            "plan": "Base",
+            "credentials": {
+                "pass": "8561341d-2d29-4750-be97-05d62867064d",
+                "id": "0658484c-0ad9-498b-a8e1-0e40a847e0b0",
+                "url": "https://perfbroker.ng.bluemix.net/1.0/credentials/0658484c-0ad9-498b-a8e1-0e40a847e0b0"
+            }
+        }
+    ]
+}

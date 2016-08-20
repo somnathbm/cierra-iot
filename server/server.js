@@ -82,8 +82,23 @@ appClient.log.setLevel = 'info';
 // device connect event
 appClient.on('connect', function(){
     console.log('Device connected!');
+
+    var myData = { 'name': 'arya', 'role': 'architect' };
+
+    // subscribe to device events
+    appClient.subscribeDeviceEvents("pi_cierra");
+    // subscribe to device status
+    appClient.subscribeDeviceStatus("pi_cierra");
+    // now, publishing event
+    appClient.publishDeviceEvent("pi_cierra", "homePi", "status", "json", myData);
 });
 
+// device response event
+appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
+    console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+});
+
+// device error event
 appClient.on('error', function(){
     console.log('Error occurred');
 });
