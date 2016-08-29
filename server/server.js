@@ -51,9 +51,36 @@ var appClientConfig = {
     "auth-token": iotConfig.credentials.apiToken
 };
 
+// IBM Watson IoT device config
+var deviceConfig = {
+    "org": "1555wo",
+    "id": "homePi",
+    "domain": "internetofthings.ibmcloud.com",
+    "type": "pi_cierra",
+    "auth-method": "token",
+    "auth-token": "2kGUBlhBx_g8Z6R-_@"
+};
+
 // init core sdk
 ibmbluemix.initialize(config);
 var logger = ibmbluemix.getLogger();
+
+console.log('IOTF is set!');
+
+// initialize Watson iot connector for device
+var deviceClient = new Client.IotfDevice(deviceConfig);
+
+// now, connect device
+deviceClient.connect();
+
+deviceClient.log.setLevel = 'info';
+
+// device connect event
+deviceClient.on('connect', function(){
+    console.log('Device connected');
+
+    deviceClient.publish("status", "json", {"d": {"fname": "john", "lname": "doe"}});
+});
 
 // initialize Watson iot connector
 var appClient = new Client.IotfApplication(appClientConfig);
@@ -75,13 +102,12 @@ app.use(function(req, res, next) {
 
 // connect to the IBM Watson IoT platform
 appClient.connect();
-console.log('IOTF is set!');
 
 appClient.log.setLevel = 'info';
 
 // device connect event
 appClient.on('connect', function(){
-    console.log('Device connected!');
+    console.log('App connected!');
 
     var myData = { 'name': 'arya', 'role': 'architect' };
 
