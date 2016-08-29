@@ -80,6 +80,10 @@ deviceClient.on('connect', function(){
     deviceClient.publish("status", "json", {"d": {"fname": "john", "lname": "doe"}});
 });
 
+deviceClient.on("command", function (commandName,format,payload,topic) {
+   console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
+});
+
 // initialize Watson iot connector
 var appClient = new Client.IotfApplication(appClientConfig);
 
@@ -115,7 +119,7 @@ appClient.on('connect', function(){
     appClient.subscribeToDeviceStatus("status");
     // now, publishing event
     setInterval(function(){
-        appClient.publishDeviceEvent("pi_cierra", "homePi", "status", "json", myData);
+        appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
     }, 1000);
 });
 
