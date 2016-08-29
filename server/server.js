@@ -110,9 +110,9 @@ appClient.on('connect', function(){
     var myData = { 'name': 'arya', 'role': 'architect' };
 
     // subscribe to device events
-    appClient.subscribeToDeviceEvents("pi_cierra");
+    appClient.subscribeToDeviceEvents("status");
     // subscribe to device status
-    appClient.subscribeToDeviceStatus("pi_cierra");
+    appClient.subscribeToDeviceStatus("status");
     // now, publishing event
     setInterval(function(){
         appClient.publishDeviceEvent("pi_cierra", "homePi", "status", "json", myData);
