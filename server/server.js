@@ -73,8 +73,6 @@ var deviceClient = new Client.IotfDevice(deviceConfig);
 // now, connect device
 deviceClient.connect();
 
-deviceClient.log.setLevel = 'info';
-
 // device connect event
 deviceClient.on('connect', function(){
     console.log('Device connected');
