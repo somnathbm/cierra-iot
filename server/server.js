@@ -90,7 +90,7 @@ appClient.on('connect', function(){
     // subscribe to device status
     appClient.subscribeToDeviceStatus("pi_cierra");
     // now, publishing event
-    appClient.publishDeviceEvent("pi_cierra", "homePi", "status", "json", myData);
+    window.setInterval(appClient.publishDeviceEvent("pi_cierra", "homePi", "status", "json", myData), 1000);
 });
 
 // device response event
