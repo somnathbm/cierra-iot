@@ -6,12 +6,14 @@ import {App, NavController, ViewController} from 'ionic-angular';
 })
 export class Lights {
 	public isChecked: Boolean = true;
+	public isTuneLight: Boolean = false;
 	constructor(public app: App, public navCtrl: NavController, public viewCtrl: ViewController) {
 
 	}
 	closeModal(){
 		this.viewCtrl.dismiss();
 	}
+
 	switchChange(){
 		if(this.isChecked){
 			this.isChecked = false;
@@ -21,6 +23,17 @@ export class Lights {
 		else{
 			this.isChecked = true;
 			alert("led switched on again");
+			return;
+		}
+	}
+
+	adjustAllChandelier(){
+		if(! this.isTuneLight ){
+			this.isTuneLight = true;
+			return;
+		}
+		else{
+			this.isTuneLight = false;
 			return;
 		}
 	}

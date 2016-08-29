@@ -22,8 +22,22 @@ $ca_light_txt_clr: darkslategray;
 .menu_light_accent{
 	background: color($colors, primary, base);
 	h3, h6{ text-align: center; }
-	h3{ margin-top: 143px; font-family: 'Caviar Dreams Bold'; }
+	h3{ margin-top: 143px; font-family: 'Satisfy Regular'; }
 	h6{ margin-top: 16px; color: lighten(#000, 15%); font-family: 'Blogger Sans Regular'; }
+}
+
+// social menu
+.socialize{
+  background: color($colors, primary, base);
+  margin-top: 43px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-self: center;
+  button{
+    box-shadow: none;
+    border: none;
+  }
 }
 
 .card-background-page {
@@ -42,10 +56,39 @@ $ca_light_txt_clr: darkslategray;
     color: #fff;
   }
 
+  .card_title_divider{
+    position: absolute;
+    width: 80px;
+    height: 6px;
+    background: crimson;
+    top: 140px;
+    left: 80px;
+  }
+  
   .switches {
   	position: absolute;
   	top: 5%;
   	right: 5%;
   	ion-item{ background: transparent !important; }
+  }
+
+  .more_controlr{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    position: absolute;
+    bottom: 5%;
+    .tuner{
+      width: 85%;
+      display: flex; 
+      align-self: flex-start;
+      button{ background: transparent; box-shadow: none; }
+      ion-item{ background: transparent !important; }
+    }
+    .custom_controlr{
+      width: 10%; 
+      align-self: flex-end;
+      button{ background: transparent; box-shadow: none; } 
+    }
   }
 }
