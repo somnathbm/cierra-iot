@@ -125,7 +125,7 @@ appClient.on('connect', function(){
 
 // device response event
 appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
-    console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+    //console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
 });
 
 // device error event
@@ -144,7 +144,9 @@ logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 
 var successComm = function(){
     return function(req, res){
-        console.log(req.body.L);
+        var response = req.param('L');
+        console.log(response);
+        res.send(response);
         //console.log(res);
     }
 };
