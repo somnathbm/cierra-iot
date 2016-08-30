@@ -1,4 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {Bedroom} from './pages/bedroom/bedroom';
@@ -46,4 +47,4 @@ export class Cierra {
   }
 }
 
-ionicBootstrap(Cierra);
+ionicBootstrap(Cierra, [HTTP_PROVIDERS]);

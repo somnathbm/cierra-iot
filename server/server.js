@@ -120,7 +120,7 @@ appClient.on('connect', function(){
     // now, publishing event
     setInterval(function(){
         appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
-    }, 1000);
+    }, 10000);
 });
 
 // device response event
@@ -142,5 +142,16 @@ app.use(ibmconfig.getContextRoot(), require('./lib/staticfile'));
 
 logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 
+var successComm = function(){
+    return function(req, res){
+        console.log(req.body.L);
+        //console.log(res);
+    }
+};
+
+////// ExpressJS routing
+app.get('/lights', successComm);
+
 app.listen(ibmconfig.getPort());
+
 logger.info('Server started at port: '+ibmconfig.getPort());
