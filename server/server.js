@@ -67,26 +67,6 @@ var logger = ibmbluemix.getLogger();
 
 console.log('IOTF is set!');
 
-// initialize Watson iot connector for device
-var deviceClient = new Client.IotfDevice(deviceConfig);
-
-// now, connect device
-deviceClient.connect();
-
-// device connect event
-deviceClient.on('connect', function(){
-    console.log('Device connected');
-
-    deviceClient.publish("status", "json", {"d": {"fname": "john", "lname": "doe"}});
-});
-
-deviceClient.on("command", function (commandName,format,payload,topic) {
-   console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
-});
-
-// initialize Watson iot connector
-var appClient = new Client.IotfApplication(appClientConfig);
-
 // all environments 
 app.set('host', process.env.VCAP_APP_HOST || 'localhost'); 
 app.set('port', process.env.VCAP_APP_PORT || 3000);
@@ -101,22 +81,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-// connect to the IBM Watson IoT platform
-appClient.connect();
-
-console.log('App connected!');
-appClient.log.setLevel = 'info';
-
-// device response event
-appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
-    console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
-});
-
-// device error event
-appClient.on('error', function(){
-    console.log('Error occurred');
-});
 
 // init basics for an express app
 app.use(require('./lib/setup'));
@@ -134,6 +98,42 @@ var successComm = function(){
         res.send("request received & processed");
 
         // send over to IBM Bluemix
+        // initialize Watson iot connector for device
+        var deviceClient = new Client.IotfDevice(deviceConfig);
+
+        // now, connect device
+        deviceClient.connect();
+
+        // device connect event
+        deviceClient.on('connect', function(){
+            console.log('Device connected');
+
+            deviceClient.publish("status", "json", {"d": {"fname": "john", "lname": "doe"}});
+        });
+
+        deviceClient.on("command", function (commandName,format,payload,topic) {
+           console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
+        });
+
+        // initialize Watson iot connector
+        var appClient = new Client.IotfApplication(appClientConfig);
+
+        // connect to the IBM Watson IoT platform
+        appClient.connect();
+
+        console.log('App connected!');
+        appClient.log.setLevel = 'info';
+
+        // device response event
+        appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
+            console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+        });
+
+        // device error event
+        appClient.on('error', function(){
+            console.log('Error occurred');
+        });
+
         // device connect event
         appClient.on('connect', function(){
             var myData = { 'L': response };
@@ -143,9 +143,7 @@ var successComm = function(){
             // subscribe to device status
             appClient.subscribeToDeviceStatus("status");
             // now, publishing event
-            setInterval(function(){
-                appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
-            }, 1000);
+            appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
         });
     };
 };
