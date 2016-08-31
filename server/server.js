@@ -111,7 +111,7 @@ appClient.log.setLevel = 'info';
 appClient.on('connect', function(){
     console.log('App connected!');
 
-    var myData = { 'name': 'arya', 'role': 'architect' };
+    var myData = { 'name': 'somnath', 'role': 'dev' };
 
     // subscribe to device events
     appClient.subscribeToDeviceEvents("status");
@@ -120,7 +120,7 @@ appClient.on('connect', function(){
     // now, publishing event
     setInterval(function(){
         appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
-    }, 10000);
+    }, 1000);
 });
 
 // device response event
