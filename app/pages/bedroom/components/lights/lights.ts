@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {App, NavController, ViewController} from 'ionic-angular';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
-import 'rxjs/add/operator/map';
+
+// import RxJS required methods
+import 'rxjs/Rx';
 
 @Component({
 	templateUrl: 'build/pages/bedroom/components/lights/lights.html'
@@ -21,14 +23,11 @@ export class Lights {
 		//console.log("hello");
 
 		// // ajax send this data to nodeJS Express server via promise or observable ?????
-		return this.http.get("lights.json", new RequestOptions({
+		return this.http.post("/lights", JSON.stringify({L: 1}), new RequestOptions({
 			headers: new Headers({"Content-Type": "application/json"})
 		}))
-			.map((res: any) => res.json())
-			.subscribe(data => {
-				this.data = data.L;
-				console.log(this.data);
-			})
+			.toPromise()
+			.then( res => console.log("succeed!"), error => console.log("error!"));
 	}
 
 	adjustAllChandelier(){
