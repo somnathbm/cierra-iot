@@ -104,8 +104,24 @@ app.use(function(req, res, next) {
 
 // connect to the IBM Watson IoT platform
 appClient.connect();
-console.log('App connected!');
+
 appClient.log.setLevel = 'info';
+
+// device connect event
+appClient.on('connect', function(){
+    console.log('App connected!');
+
+    var myData = { 'name': 'arya', 'role': 'architect' };
+
+    // subscribe to device events
+    appClient.subscribeToDeviceEvents("status");
+    // subscribe to device status
+    appClient.subscribeToDeviceStatus("status");
+    // now, publishing event
+    setInterval(function(){
+        appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
+    }, 10000);
+});
 
 // device response event
 appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
@@ -128,24 +144,7 @@ logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 
 var successComm = function(){
     return function(req, res){
-        var response = req.body.L;
-
-        // send over to IBM Bluemix
-        // device connect event
-        appClient.on('connect', function(){
-
-            var myData = { 'L': response };
-
-            // subscribe to device events
-            appClient.subscribeToDeviceEvents("status");
-            // subscribe to device status
-            appClient.subscribeToDeviceStatus("status");
-            // now, publishing event
-            setInterval(function(){
-                appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
-            }, 10000);
-        });
-
+        var response = "`" + req.body.L + "`";
         console.log(response);
         res.send("request received & processed");
     };
