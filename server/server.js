@@ -82,15 +82,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-// send over to IBM Bluemix
-// initialize Watson iot connector for device
-var deviceClient = new Client.IotfDevice(deviceConfig);
-// initialize Watson iot connector for app
-var appClient = new Client.IotfApplication(appClientConfig);
-
-appClient.log.setLevel = 'info';
-deviceClient.log.setLevel = 'info';
-
 // init basics for an express app
 app.use(require('./lib/setup'));
 
@@ -100,27 +91,26 @@ app.use(ibmconfig.getContextRoot(), require('./lib/staticfile'));
 
 logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 
-var successComm = function(){
-    return function(req, res){
-        var response = req.body.L;
-        console.log(response);
-        res.send("request received & processed");
+// initialize Watson iot connector for device
+var deviceClient = new Client.IotfDevice(deviceConfig);
+// initialize Watson iot connector for app
+var appClient = new Client.IotfApplication(appClientConfig);
 
-        // now, connect device & app to IBM IOT platform
+appClient.log.setLevel = 'info';
+deviceClient.log.setLevel = 'info';
+
+// now, connect device & app to IBM IOT platform
 deviceClient.connect();
 appClient.connect();
 
-        // check coonection status to IBM IOT platform
-            // --- App ---
+// --- App ---
             appClient.on('connect', function(){
                 console.log("app connect event triggered!");
                 // subscribe to device events
                 appClient.subscribeToDeviceEvents("pi_cierra");
                 // subscribe to device status
                 appClient.subscribeToDeviceStatus("pi_cierra");
-                //demo data to send
-                var myData = { 'name': 'somnath', 'role':  'architect' };
-                appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);    
+                    
             });
 
             // app error event
@@ -142,10 +132,21 @@ appClient.connect();
         deviceClient.on("command", function (commandName,format,payload,topic) {
            console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
         });
+
+
+var successComm = function(){
+    return function(req, res){
+        var response = req.body.L;
+        console.log(response);
+        res.send("request received & processed");
+
+        //demo data to send
+        var myData = { 'name': 'somnath', 'role':  'architect' };
+        appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
     };
 };
 
-var deviceId = 'homePi';
+// var deviceId = 'homePi';
 
 ////// ExpressJS routing
 //app.post('/lights', lightserver.sendLightData(appClient, deviceId));
