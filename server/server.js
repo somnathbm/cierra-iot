@@ -10,6 +10,8 @@ var express      = require('express'),
     ibmcloudcode = require('ibmcloudcode'),
     Client       = require('ibmiotf'),
     namespace    = require('express-namespace');
+    // load local modules
+    //lightserver  = require('./data/lightServer');
 
 
 // IBM Bluemix app id config
@@ -43,9 +45,8 @@ else{
 // IBM Watson IoT appclient config
 var appClientConfig = {
     "org": "1555wo",
-    "id": "homePi",
+    "id": "295033ac-e5ad-4769-bc20-9fc1711b813f",
     "domain": "internetofthings.ibmcloud.com",
-    "type": "pi_cierra",
     "auth-method": "apikey",
     "auth-key": iotConfig.credentials.apiKey,
     "auth-token": iotConfig.credentials.apiToken
@@ -81,6 +82,14 @@ app.use(function(req, res, next) {
     next();
 });
 
+// send over to IBM Bluemix
+// initialize Watson iot connector for device
+var deviceClient = new Client.IotfDevice(deviceConfig);
+// initialize Watson iot connector for app
+var appClient = new Client.IotfApplication(appClientConfig);
+
+appClient.log.setLevel = 'info';
+deviceClient.log.setLevel = 'info';
 
 // init basics for an express app
 app.use(require('./lib/setup'));
@@ -97,58 +106,49 @@ var successComm = function(){
         console.log(response);
         res.send("request received & processed");
 
-        // send over to IBM Bluemix
-        // initialize Watson iot connector for device
-        var deviceClient = new Client.IotfDevice(deviceConfig);
+        // now, connect device & app to IBM IOT platform
+deviceClient.connect();
+appClient.connect();
 
-        // now, connect device
-        deviceClient.connect();
+        // check coonection status to IBM IOT platform
+            // --- App ---
+            appClient.on('connect', function(){
+                console.log("app connect event triggered!");
+                // subscribe to device events
+                appClient.subscribeToDeviceEvents("pi_cierra");
+                // subscribe to device status
+                appClient.subscribeToDeviceStatus("pi_cierra");
+                //demo data to send
+                var myData = { 'name': 'somnath', 'role':  'architect' };
+                appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);    
+            });
 
-        // device connect event
-        deviceClient.on('connect', function(){
-            console.log('Device connected');
+            // app error event
+            appClient.on('error', function(err){
+                console.log("App Error: " + err);
+            });
 
-            deviceClient.publish("status", "json", {"d": {"fname": "john", "lname": "doe"}});
-        });
+            // --- Device ---
+            deviceClient.on('connect', function(){
+                console.log('Device connected!');
+            });
 
+            // device error event
+            deviceClient.on('error', function(err){
+                console.log('Device Error: ' + err);
+            });
+
+        // device recipient command event from app 
         deviceClient.on("command", function (commandName,format,payload,topic) {
            console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
-        });
-
-        // initialize Watson iot connector
-        var appClient = new Client.IotfApplication(appClientConfig);
-
-        // connect to the IBM Watson IoT platform
-        appClient.connect();
-
-        console.log('App connected!');
-        appClient.log.setLevel = 'info';
-
-        // device response event
-        appClient.on("deviceEvent", function(deviceType, deviceId, eventType, format, payload){
-            console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
-        });
-
-        // device error event
-        appClient.on('error', function(){
-            console.log('Error occurred');
-        });
-
-        // device connect event
-        appClient.on('connect', function(){
-            var myData = { 'L': response };
-
-            // subscribe to device events
-            appClient.subscribeToDeviceEvents("status");
-            // subscribe to device status
-            appClient.subscribeToDeviceStatus("status");
-            // now, publishing event
-            appClient.publishDeviceCommand("pi_cierra", "homePi", "status", "json", myData);
         });
     };
 };
 
+var deviceId = 'homePi';
+
 ////// ExpressJS routing
+//app.post('/lights', lightserver.sendLightData(appClient, deviceId));
 app.post('/lights', successComm());
 
 app.listen(ibmconfig.getPort());
