@@ -54,14 +54,14 @@ var appClientConfig = {
 };
 
 // IBM Watson IoT device config
-var deviceConfig = {
-    "org": "1555wo",
-    "id": "homePi",
-    "domain": "internetofthings.ibmcloud.com",
-    "type": "pi_cierra",
-    "auth-method": "token",
-    "auth-token": "2kGUBlhBx_g8Z6R-_@"
-};
+// var deviceConfig = {
+//     "org": "1555wo",
+//     "id": "homePi",
+//     "domain": "internetofthings.ibmcloud.com",
+//     "type": "pi_cierra",
+//     "auth-method": "token",
+//     "auth-token": "2kGUBlhBx_g8Z6R-_@"
+// };
 
 // init core sdk
 ibmbluemix.initialize(config);
@@ -93,15 +93,15 @@ app.use(ibmconfig.getContextRoot(), require('./lib/staticfile'));
 logger.info('mbaas context root: '+ibmconfig.getContextRoot());
 
 // initialize Watson iot connector for device
-var deviceClient = new Client.IotfDevice(deviceConfig);
+//var deviceClient = new Client.IotfDevice(deviceConfig);
 // initialize Watson iot connector for app
 var appClient = new Client.IotfApplication(appClientConfig);
 
 appClient.log.setLevel = 'info';
-deviceClient.log.setLevel = 'info';
+//deviceClient.log.setLevel = 'info';
 
 // now, connect device & app to IBM IOT platform
-deviceClient.connect();
+//deviceClient.connect();
 appClient.connect();
 
 // --- App ---
@@ -120,19 +120,19 @@ appClient.connect();
             });
 
             // --- Device ---
-            deviceClient.on('connect', function(){
-                console.log('Device connected!');
-            });
+        //     deviceClient.on('connect', function(){
+        //         console.log('Device connected!');
+        //     });
 
-            // device error event
-            deviceClient.on('error', function(err){
-                console.log('Device Error: ' + err);
-            });
+        //     // device error event
+        //     deviceClient.on('error', function(err){
+        //         console.log('Device Error: ' + err);
+        //     });
 
-        // device recipient command event from app 
-        deviceClient.on("command", function (commandName,format,payload,topic) {
-           console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
-        });
+        // // device recipient command event from app 
+        // deviceClient.on("command", function (commandName,format,payload,topic) {
+        //    console.log("device command:" + commandName + "," + format + "," + payload + "," + topic);
+        // });
 
 
 var successComm = function(){
