@@ -48,6 +48,7 @@ var appClientConfig = {
     "id": "295033ac-e5ad-4769-bc20-9fc1711b813f",
     "domain": "internetofthings.ibmcloud.com",
     "auth-method": "apikey",
+    "type": "shared",
     "auth-key": iotConfig.credentials.apiKey,
     "auth-token": iotConfig.credentials.apiToken
 };
